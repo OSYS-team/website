@@ -22,7 +22,7 @@ const sass = gulpSass(sassCompiler);
 
 var deployOptions = {
   remoteUrl: "git@github.com:OSYS-team/website.git",
-  branch: "gh-pages",
+  branch: "main",
 };
 
 gulp.task("deploy", function () {
