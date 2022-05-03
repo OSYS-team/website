@@ -1,5 +1,5 @@
 import gulp from "gulp";
-
+import deploy from "gulp-gh-pages";
 import gulpSass from "gulp-sass";
 import concat from "gulp-concat";
 import imagemin from "gulp-imagemin";
@@ -20,6 +20,13 @@ const { src, dest, watch, series, parallel } = gulp;
 const browserSync = BrowserSync.create();
 const nodepath = "node_modules/";
 const sass = gulpSass(sassCompiler);
+
+/**
+ * Push build to gh-pages
+ */
+gulp.task("deploy", function () {
+  return gulp.src("./dist/**/*").pipe(deploy());
+});
 
 //Load Previews on Browser on dev
 function livePreview(done) {
@@ -94,7 +101,7 @@ function concatCssPlugins() {
     nodepath + "plyr/dist/plyr.css",
     nodepath + "codemirror/lib/codemirror.css",
     nodepath + "codemirror/theme/shadowfox.css",
-    nodepath + "@scavengerbot/cryptofont/style.css"
+    nodepath + "@scavengerbot/cryptofont/style.css",
   ])
     .pipe(sourcemaps.init())
     .pipe(concat("app.css"))
