@@ -20,12 +20,15 @@ const { src, dest, watch, series, parallel } = gulp;
 const browserSync = BrowserSync.create();
 const nodepath = "node_modules/";
 const sass = gulpSass(sassCompiler);
+const ghPages = deploy;
 
 /**
  * Push build to gh-pages
  */
 gulp.task("deploy", function () {
-  return gulp.src("./dist/**/*").pipe(deploy());
+  return gulp.src("./dist/**/*").pipe(ghPages({
+    branch: "main",
+  }));
 });
 
 //Load Previews on Browser on dev
